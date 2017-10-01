@@ -16,7 +16,7 @@ namespace CustomRenderer
                 {
                     Type = PinType.Place,
                     Position = new Position(37.79752, -121.40183),
-                    Label = "a",
+                    Label = "a1",
                     Address = "1"
                 },
                 Id = "Xamarin",
@@ -30,7 +30,7 @@ namespace CustomRenderer
                 {
                     Type = PinType.Place,
                     Position = new Position(36.79752, -121.40183),
-                    Label = "b",
+                    Label = "b2",
                     Address = "2"
                 },
                 Id = "Google",
