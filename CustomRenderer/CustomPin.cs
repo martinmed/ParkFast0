@@ -10,5 +10,7 @@ namespace CustomRenderer
 
 		public string Url { get; set; }
 
-	}
+        public bool Estado { get; set; }
+
+    }
 }

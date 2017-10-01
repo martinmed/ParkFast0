@@ -15,17 +15,33 @@ namespace CustomRenderer
                 Pin = new Pin
                 {
                     Type = PinType.Place,
-                    Position = new Position(37.79752, -122.40183),
-                    Label = "Xamarin San Francisco Office",
-                    Address = "394 Pacific Ave, San Francisco CA"
+                    Position = new Position(37.79752, -121.40183),
+                    Label = "a",
+                    Address = "1"
                 },
                 Id = "Xamarin",
-                Url = "http://xamarin.com/about/"
+                Url = "http://xamarin.com/about/",
+                Estado=true
             };
 
-            customMap.CustomPins = new List<CustomPin> { pin };
+            var pin2 = new CustomPin
+            {
+                Pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = new Position(36.79752, -121.40183),
+                    Label = "b",
+                    Address = "2"
+                },
+                Id = "Google",
+                Url = "http://google.com/about/",
+                Estado=false
+            };
+
+            customMap.CustomPins = new List<CustomPin> { pin,pin2 };
 			customMap.Pins.Add (pin.Pin);
-			customMap.MoveToRegion (MapSpan.FromCenterAndRadius (new Position (37.79752, -122.40183), Distance.FromMiles (1.0)));
+            customMap.Pins.Add (pin2.Pin);
+            customMap.MoveToRegion (MapSpan.FromCenterAndRadius (new Position (37.79752, -122.40183), Distance.FromMiles (1.0)));
 		}
 	}
 }

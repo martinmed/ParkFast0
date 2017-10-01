@@ -52,9 +52,14 @@ namespace CustomRenderer.Droid
                     marker.SetPosition(new LatLng(pin.Pin.Position.Latitude, pin.Pin.Position.Longitude));
                     marker.SetTitle(pin.Pin.Label);
                     marker.SetSnippet(pin.Pin.Address);
-                    //aqui debe estar la condicion creo
-                    marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.pin));
-
+                    if (pin.Estado == true)
+                    {
+                        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.pin));
+                    }
+                    else
+                    {
+                        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.pin2));
+                    }
                     NativeMap.AddMarker(marker);
                 }
                 isDrawn = true;
