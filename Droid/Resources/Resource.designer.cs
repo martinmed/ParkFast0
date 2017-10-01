@@ -2464,14 +2464,17 @@ namespace CustomRenderer.Droid
 			// aapt resource value: 0x7f0200cc
 			public const int mr_ic_play_light = 2130837708;
 			
-			// aapt resource value: 0x7f0200cf
-			public const int notification_template_icon_bg = 2130837711;
+			// aapt resource value: 0x7f0200d0
+			public const int notification_template_icon_bg = 2130837712;
 			
 			// aapt resource value: 0x7f0200cd
 			public const int pin = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int xamarin = 2130837710;
+			public const int pin2 = 2130837710;
+			
+			// aapt resource value: 0x7f0200cf
+			public const int xamarin = 2130837711;
 			
 			static Drawable()
 			{
