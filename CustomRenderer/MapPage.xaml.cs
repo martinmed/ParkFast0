@@ -89,47 +89,65 @@ namespace CustomRenderer
 
             //customMap.IsShowingUser = true;
             //requestGPSAsync();
-            var datosusuario=obtenerDatosOcupacion();
-            var datosResultadoOcupacion = JArray.Parse(datosusuario);
+            var datoOcupacion=obtenerDatosOcupacion();
+            var datosResultadoOcupacion = JArray.Parse(datosOcupacion);
             //findMe();
-
-            
-
-            customMap.CustomPins = new List<CustomPin>();
-            int contador = 0;
             string estado = "";
-            Boolean estadoB;
-            foreach (var element in datosResultadoOcupacion)
+            bool estadoB;
+            ///////////////////////////////////////////////////
+            if ((int)datosResultadoOcupacion[0]["estado"] == 1)
             {
-                if ((int)datosResultadoOcupacion[contador]["estado"]==0)
-                {
-                    estadoB = true;
-                    estado = "Ocupado";
-                }
-                else
-                {
-                    estadoB = false;
-                    estado = "Desocupado";
-                }
-                var pin = new CustomPin
-                {
-                    Pin = new Pin
-                    {
-                        Type = PinType.Place,
-                        Position = new Position((double)
-                        datosResultadoOcupacion[contador]["coordenadas_lat"]
-                        , (double)datosResultadoOcupacion[contador]["coordenadas_lon"]),
-                        Label = "a1",
-                        Address = "En calle " + datosResultadoOcupacion[contador]["calle"].ToString() + " con " + datosResultadoOcupacion[contador]["interseccion1"].ToString(),
-                    },
-                    Id = estado,
-                    Url = "",
-                    Estado = estadoB
-                };
-                customMap.Pins.Add(pin.Pin);
-                contador++;
+                estado = "ocupado";
+                estadoB = false;
             }
-            
+            else
+            {
+                estado = "desocupado";
+                estadoB = true;
+            }
+            //////////////////////////
+            var pin = new CustomPin
+            {
+                Pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = new Position((double)datosResultadoOcupacion[0]["coordenadas_lat"],(double)datosResultadoOcupacion[0]["coordenadas_lon"]),
+                    Label = estado,
+                    Address = datosResultadoOcupacion[0]["calle"].ToString(),
+                },
+                Id = "Xamarin",
+                Url = "",
+                Estado=false//estadoB
+            };
+            //////////////////////////////////////////////////////
+            if ((int)datosResultadoOcupacion[1]["estado"] == 1)
+            {
+                estado = "ocupado";
+                estadoB = false;
+            }
+            else
+            {
+                estado = "desocupado";
+                estadoB = true;
+            }
+            ///////////////////////////////
+            var pin2 = new CustomPin
+            {
+                Pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = new Position((double)datosResultadoOcupacion[1]["coordenadas_lat"], (double)datosResultadoOcupacion[1]["coordenadas_lon"]),
+                    Label = estado,
+                    Address = datosResultadoOcupacion[1]["calle"].ToString(),
+                },
+                Id = "Google",
+                Url = "",
+                Estado=true//estadoB
+            };
+            /////////////////////////////////////////////////////////
+            customMap.CustomPins = new List<CustomPin> { pin,pin2 };
+			customMap.Pins.Add (pin.Pin);
+            customMap.Pins.Add (pin2.Pin);            
         }
 	}
 }
