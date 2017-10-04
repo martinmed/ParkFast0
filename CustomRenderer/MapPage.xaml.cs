@@ -17,9 +17,9 @@ using System.Net.Http;
 
 namespace CustomRenderer
 {
-   
+
     public partial class MapPage : ContentPage
-	{
+    {
         public CustomMap mapa = new CustomMap();
 
         string datosOcupacion;
@@ -39,7 +39,7 @@ namespace CustomRenderer
                     }
                 }
             }
-        }        
+        }
 
         private async void findMe()
         {
@@ -47,7 +47,7 @@ namespace CustomRenderer
             Plugin.Geolocator.Abstractions.Position position = new Plugin.Geolocator.Abstractions.Position();
 
             position = await locator.GetPositionAsync();
-            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude),Distance.FromMiles(1)));
+            customMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude), Distance.FromMiles(1)));
         }
 
         private async void requestGPSAsync()
@@ -76,78 +76,83 @@ namespace CustomRenderer
                     await DisplayAlert("Location Denied", "Can not continue, try again.", "OK");
                 }
             }
-            catch 
+            catch
             {
 
             }
         }
 
-        public MapPage ()
-		{
-            
-            InitializeComponent ();
+        public MapPage()
+        {
+
+            InitializeComponent();
 
             //customMap.IsShowingUser = true;
             //requestGPSAsync();
-            var datoOcupacion=obtenerDatosOcupacion();
+            // ArrayList<tipoDato> = new;
+            var datoOcupacion = obtenerDatosOcupacion();
             var datosResultadoOcupacion = JArray.Parse(datosOcupacion);
             //findMe();
-            string estado = "";
-            bool estadoB;
+            string estadoletra = "";
+            bool estadoBool;
             ///////////////////////////////////////////////////
-            if ((int)datosResultadoOcupacion[0]["estado"] == 1)
-            {
-                estado = "ocupado";
-                estadoB = false;
-            }
-            else
-            {
-                estado = "desocupado";
-                estadoB = true;
-            }
+
             //////////////////////////
-            var pin = new CustomPin
+
+            int counter = 0;
+
+            Title = "Stores";
+            Icon = "flag_map_marker4.png";
+
+
+            var customMap = new CustomMap
             {
-                Pin = new Pin
-                {
-                    Type = PinType.Place,
-                    Position = new Position((double)datosResultadoOcupacion[0]["coordenadas_lat"],(double)datosResultadoOcupacion[0]["coordenadas_lon"]),
-                    Label = estado,
-                    Address = datosResultadoOcupacion[0]["calle"].ToString(),
-                },
-                Id = "Xamarin",
-                Url = "",
-                Estado=false//estadoB
+                MapType = MapType.Street,
+                WidthRequest = App.ScreenWidth,
+                HeightRequest = App.ScreenHeight
             };
-            //////////////////////////////////////////////////////
-            if ((int)datosResultadoOcupacion[1]["estado"] == 1)
+
+            customMap.CustomPins = new List<CustomPin>();
+
+            foreach (var v in datosResultadoOcupacion)
             {
-                estado = "ocupado";
-                estadoB = false;
-            }
-            else
-            {
-                estado = "desocupado";
-                estadoB = true;
-            }
-            ///////////////////////////////
-            var pin2 = new CustomPin
-            {
-                Pin = new Pin
+                if ((int)datosResultadoOcupacion[counter]["estado"] == 1)
                 {
-                    Type = PinType.Place,
-                    Position = new Position((double)datosResultadoOcupacion[1]["coordenadas_lat"], (double)datosResultadoOcupacion[1]["coordenadas_lon"]),
-                    Label = estado,
-                    Address = datosResultadoOcupacion[1]["calle"].ToString(),
-                },
-                Id = "Google",
-                Url = "",
-                Estado=true//estadoB
-            };
-            /////////////////////////////////////////////////////////
-            customMap.CustomPins = new List<CustomPin> { pin,pin2 };
-			customMap.Pins.Add (pin.Pin);
-            customMap.Pins.Add (pin2.Pin);            
+                    estadoBool = false;
+                    estadoletra = "Ocupado";
+                }
+                else
+                {
+                    estadoBool = true;
+                    estadoletra = "Desocupado";
+                }
+                var pin = new CustomPin()
+                {
+                    Pin = new Pin()
+                    {
+                        Type = PinType.Place,
+                        Position = new Position((double)datosResultadoOcupacion[counter]["coordenadas_lat"], (double)datosResultadoOcupacion[counter]["coordenadas_lon"]),
+                        Label = estadoletra,
+                        Address = "Calle "+datosResultadoOcupacion[counter]["calle"].ToString()+" con " + datosResultadoOcupacion[counter]["interseccion1"].ToString()
+                    },
+                    Id = "id: "+counter,
+                    Url = "",
+                    Estado = estadoBool
+                };
+                customMap.CustomPins.Add(pin);
+                counter++;
+            }
+            foreach (var pin in customMap.CustomPins)
+            {
+                customMap.Pins.Add(pin.Pin);
+            }
+            // dont delete below code ,they will save you if timer doesnt work .
+
+            customMap.MoveToRegion (MapSpan.FromCenterAndRadius (customMap.CustomPins [0].Pin.Position, Distance.FromMiles (0.20)));
+            Content = customMap;
         }
-	}
+
+
+    }
 }
+

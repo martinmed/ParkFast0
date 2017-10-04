@@ -149,7 +149,6 @@
     <BundleResource Include="Resources\Icon-Small-40.png" />
     <BundleResource Include="Resources\Icon-Small-40%402x.png" />
     <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\monkey.png" />
     <BundleResource Include="Resources\xamarin.png" />
     <BundleResource Include="Resources\pin.png" />
   </ItemGroup>
@@ -171,6 +170,12 @@
   <ItemGroup>
     <ITunesArtwork Include="ITunesArtwork" />
     <ITunesArtwork Include="ITunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\facesad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\monkey.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

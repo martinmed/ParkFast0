@@ -66,15 +66,30 @@ namespace CustomRenderer.iOS
             annotationView = mapView.DequeueReusableAnnotation(customPin.Id);
             if (annotationView == null)
             {
-                annotationView = new CustomMKAnnotationView(annotation, customPin.Id)
+                if (customPin.Estado == true)
                 {
-                    Image = UIImage.FromFile("pin.png"),
-                    CalloutOffset = new CGPoint(0, 0),
-                    LeftCalloutAccessoryView = new UIImageView(UIImage.FromFile("monkey.png")),
-                    RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure)
-                };
-                ((CustomMKAnnotationView)annotationView).Id = customPin.Id;
-                ((CustomMKAnnotationView)annotationView).Url = customPin.Url;
+                    annotationView = new CustomMKAnnotationView(annotation, customPin.Id)
+                    {
+                        Image = UIImage.FromFile("pin.png"),
+                        CalloutOffset = new CGPoint(0, 0),
+                        LeftCalloutAccessoryView = new UIImageView(UIImage.FromFile("facesad.png")),
+                        RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure)
+                    };
+                    ((CustomMKAnnotationView)annotationView).Id = customPin.Id;
+                    ((CustomMKAnnotationView)annotationView).Url = customPin.Url;
+                }
+                else
+                {
+                    annotationView = new CustomMKAnnotationView(annotation, customPin.Id)
+                    {
+                        Image = UIImage.FromFile("pin.png"),
+                        CalloutOffset = new CGPoint(0, 0),
+                        LeftCalloutAccessoryView = new UIImageView(UIImage.FromFile("facesmile.png")),
+                        RightCalloutAccessoryView = UIButton.FromType(UIButtonType.DetailDisclosure)
+                    };
+                    ((CustomMKAnnotationView)annotationView).Id = customPin.Id;
+                    ((CustomMKAnnotationView)annotationView).Url = customPin.Url;
+                }
             }
             annotationView.CanShowCallout = true;
             return annotationView;
