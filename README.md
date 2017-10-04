@@ -6,5 +6,5 @@ This app demonstrates how to add pins from a database dynamically getting data f
 Author
 ------
 
-Martin Medina Nualart
+Martin Medina Nualart,
 Matthias Beyer
