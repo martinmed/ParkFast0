@@ -1,11 +1,10 @@
-Map Custom Renderer
+ParkFast
 ===================
 
-This sample demonstrates how to create a custom renderer for the `Map` control, which displays a native map with a customized pin and a customized view of the pin data on each platform.
-
-For more information about this sample see [Customizing a Map Pin](http://developer.xamarin.com/guides/xamarin-forms/custom-renderer/map/customized-pin/).
+This app demonstrates how to add pins from a database dynamically getting data from a webservice through json
 
 Author
 ------
 
-David Britch
+Martin Medina Nualart
+Matthias Beyer
